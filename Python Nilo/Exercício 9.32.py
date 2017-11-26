@@ -1,3 +1,9 @@
+## Nome do Programa: Pesquisa de Diretórios
+## Autor: Guilherme Mendes
+## Descrição: O programa recebe um caminho do usuário e retorna se ele pertence a
+## um arquivo ou diretório, caso exista
+
+## Carregar pacotes
 import os
 import os.path
 
