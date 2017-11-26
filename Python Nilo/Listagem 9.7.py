@@ -1,9 +1,29 @@
+## Nome do Programa: Agenda
+## Autor: Guilherme Mendes
+## Descrição: Implementa um sistema simples de agenda em Python
+## Versão: 1.0
+## Data: 26/11/2017
+
+
+## Definição de variáveis
 agenda = []
 
+
+## Definição de funções
+
 def pede_nome():
+    '''
+    Pede para o usuário inserir um nome    
+    '''
+    
     return(input("Nome: "))
 
 def pede_telefone(t="\n-- Adicionar Telefone --"):
+    '''
+    Pede para o usuário inserir um telefone
+        t : texto de apoio
+    '''
+    
     print(t)
     tipo = input(" Tipo: ")
     
@@ -11,7 +31,15 @@ def pede_telefone(t="\n-- Adicionar Telefone --"):
 
     return [tipo, num]
 
+# 
 def mostra_dados(nome, telefones, numero=-1):
+    '''
+    Mostra os dados dos contatos
+        nome : nome a ser mostrado
+        telefones : telefones a serem mostrados
+        numero : o número do contato (-1 não mostra nada)
+    '''
+    
     n = ("%s" % nome).ljust(20)
     s = "" if numero == -1 else "{0}. ".format(numero)
     
@@ -21,9 +49,18 @@ def mostra_dados(nome, telefones, numero=-1):
         print(" Telefone %s: %s" % (t[0], t[1]))
 
 def pede_nome_arquivo():
+    '''
+    Pede o nome do arquivo
+    '''
+    
     return(input("Nome do arquivo: "))
 
 def pesquisa(nome):
+    '''
+    Pesquisa um nome na agenda, e retorna sua posição
+        nome : nome a ser pesquisado
+    '''
+    
     mnome = nome.lower()
     for p, e in enumerate(agenda):
         if e[0].lower() == mnome:
@@ -31,6 +68,10 @@ def pesquisa(nome):
     return None
 
 def novo():
+    '''
+    Cria um novo contato
+    '''
+    
     global agenda
 
     nome = pede_nome()
@@ -49,6 +90,11 @@ def novo():
     valida_novo_contato(nome, t)
 
 def mais_telefone(t="Adicionar"):
+    '''
+    Dá a possibilidade de o usuário adicionar mais telefones
+        t : texto de apoio
+    '''
+    
     while True:
         q = input("\n%s mais telefones? (S) ou (N): " % t)
         if q == "S":
@@ -60,6 +106,10 @@ def mais_telefone(t="Adicionar"):
             
 
 def apaga():
+    '''
+    Apaga um contato
+    '''
+    
     global agenda
 
     nome = pede_nome()
@@ -73,6 +123,10 @@ def apaga():
         print("Nome não encontrado")
 
 def altera():
+    '''
+    Altera um contato
+    '''
+    
     p = pesquisa(pede_nome())
 
     if p != None:
@@ -112,6 +166,10 @@ def altera():
         print ("Nome não encontrado")
 
 def altera_telefone(telefones):
+    '''
+    Altera os telefones de um contato
+    '''
+    
     ntelefone = pede_telefone("")
 
     x = 0
@@ -129,6 +187,10 @@ def altera_telefone(telefones):
     
 
 def lista():
+    '''
+    Exibe os dados da agenda
+    '''
+    
     print("\n-- Agenda --\n\n------")
     x = 1
     for e in agenda:
@@ -137,6 +199,11 @@ def lista():
     print("\n------\n")
 
 def lê(forçar_nome=""):
+    '''
+    Carrega uma agenda salva
+        forçar_nome : arquivo a ser aberto (vazio para pedir o nome ao usuário)
+    '''
+    
     global agenda
 
     if forçar_nome == "":
@@ -162,6 +229,10 @@ def lê(forçar_nome=""):
     salvar_referencia_arquivo(nome_arquivo)
 
 def grava():
+    '''
+    Salva a agenda
+    '''
+    
     nome_arquivo = pede_nome_arquivo()
 
     arquivo = open(nome_arquivo, "w", encoding="utf-8")
@@ -177,9 +248,17 @@ def grava():
     salvar_referencia_arquivo(nome_arquivo)
 
 def tamanho():
+    '''
+    Retorna o tamanho da agenda
+    '''
+    
     return len(agenda)
 
 def confirmar():
+    '''
+    Janela para confirmação de operações
+    '''
+    
     result = None
 
     while result == None:
@@ -194,7 +273,14 @@ def confirmar():
     return result
 
 
-def valida_novo_contato(nome, telefones, tipo=1):
+def valida_novo_contato(nome, telefones, tipo=1):    
+    '''
+    Retorna se o novo contato é válido ou não
+        nome : novo nome
+        telefones : novos telefones
+        tipo : 1 adiciona o contato à agenda, se for válido; 2 apenas retorna o contato
+    '''
+    
     error = False
 
     for e in telefones:
@@ -213,6 +299,13 @@ def valida_novo_contato(nome, telefones, tipo=1):
             raise TypeError("Tipo inválido")
 
 def valida_faixa_inteiro(pergunta, inicio, fim):
+    '''
+    Valida o retorno a uma pergunta feita ao usuário
+        pergunta : texto a ser exibido para a pergunta
+        inicio : menor valor aceitável
+        fim : maior valor aceitável
+    '''
+    
     while True:
         try:
             valor = int(input(pergunta))
@@ -222,6 +315,11 @@ def valida_faixa_inteiro(pergunta, inicio, fim):
             print("Valor inválido, favor digitar entre %d e %d" % (inicio, fim))
 
 def salvar_referencia_arquivo(nome):
+    '''
+    Salva a referência do arquivo em que a agenda será salva/carregada
+        nome : nome do arquivo
+    '''
+    
     global referencia
 
     referencia = nome
@@ -231,12 +329,20 @@ def salvar_referencia_arquivo(nome):
     salvar_ref.close
 
 def carregar_referencia():
+    '''
+    Carrega a agena a partir do arquivo de referência salvo
+    '''
+    
     ref = open("referencias.txt", "r")
     lê(ref.readlines(0)[0])
     ref.close
     
 
 def menu():
+    '''
+    Estabelece o menu da agenda
+    '''
+    
     print("\nAGENDA - %d pessoa(s)" % tamanho())
     print("""
 1 - Novo
@@ -249,6 +355,9 @@ def menu():
 0 - Sai
 """)
     return valida_faixa_inteiro("Escolha uma opção: ", 0, 6)
+
+
+## Programa
 
 try:
     carregar_referencia()
