@@ -1,6 +1,7 @@
-#-------------------------------------
-# Exibe os N primeiros números primos
-#-------------------------------------
+# Nome do Pograma: Números Primos
+# Autor: Guilherme Mendes
+# Descrição: Exibe os N primeiros números primos
+
 
 while True:
     
