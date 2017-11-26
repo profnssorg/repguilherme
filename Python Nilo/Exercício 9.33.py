@@ -1,6 +1,16 @@
+## Nome do Programa: Imagens no HTML
+## Autor: Guilherme Mendes
+## Descrição: Cria uma página HTML com todas as imagens da pasta PICTURES
+## Versão: 1.0
+## Data: 26/11/2017
+
+
+## Importação de módulos
 import os
 import os.path
 
+
+## Declaração de variáveis
 pictures = []
 
 os.chdir("../../Pictures")
